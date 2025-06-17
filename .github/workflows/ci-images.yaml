@@ -1,0 +1,77 @@
+name: Update Image Tag
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  update-tag:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      ECR_REGISTRY: 430118814982.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+      ECR_REPOSITORY: unibook/frontend-crm
+      IMAGE_TAG_REPO: UnicornBook/unibook-platform
+      COMPONENT_NAME: ${{ github.repository_owner }}
+
+    steps:
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1  
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Checkout component repo (current)
+        uses: actions/checkout@v4
+
+      - name: Get commit hash
+        id: vars
+        run: echo "commit_sha=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        run: |
+            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.vars.outputs.commit_sha }} .
+            docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.vars.outputs.commit_sha }}
+            echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:${{ steps.vars.outputs.commit_sha }}"
+            
+      - name: Generate GitHub App token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: UnicornBook
+          repositories: unibook-platform                    
+
+      - name: Checkout image tag repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.IMAGE_TAG_REPO }}
+          token: ${{ steps.generate-token.outputs.token }}
+          path: image-tags
+
+      - name: Update images.json
+        run: | 
+          chmod +x ./images-ci.sh
+          ./images-ci.sh image-tags/images.json $COMPONENT_NAME ${{ github.ref_name }} ${{ steps.vars.outputs.commit_sha }}
+
+      - name: Commit and push changes
+        run: |
+          cd image-tags
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add images.json
+          git commit -m "Update $COMPONENT_NAME image tag for branch ${{ github.ref_name }} to ${{ steps.vars.outputs.commit_sha }}" || echo "No changes"
+          git push

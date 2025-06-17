@@ -1,0 +1,14 @@
+.container_facilities {
+	width: fit-content;
+	min-width: 400px;
+	display: flex;
+	gap: 10px;
+	align-items: flex-end;
+}
+
+@media (max-width: 450px) {
+	.container_facilities {
+		min-width: 280px;
+		gap: 5px;
+	}
+}

@@ -1,0 +1,56 @@
+import { Flex } from 'antd'
+import { StyledTabs } from '../../../components/UI/StyledTabs'
+import {
+	Outlet,
+	useLocation,
+	useNavigate,
+	useSearchParams,
+} from 'react-router-dom'
+import { useEffect } from 'react'
+
+export const ReportPageAdmin = () => {
+	const [searchparam, setSearchParams] = useSearchParams()
+	const { pathname } = useLocation()
+	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (
+			!pathname.includes('day') &&
+			!pathname.includes('/all') &&
+			!pathname.includes('/clients') &&
+			!pathname.includes('/services') &&
+			!pathname.includes('/stuffs') &&
+			!pathname.includes('/day')
+			// !pathname.includes('/history')
+		) {
+			navigate('day')
+		}
+	}, [])
+
+	const TabsValue = [
+		{
+			value: 'Отчет за день',
+			to: 'day',
+		},
+	]
+
+	const add = `?date-type=${searchparam.get('date-type') || 'WEEK'}`
+
+	return (
+		<Flex
+			vertical
+			gap={10}
+			className="w-full h-full min-h-[calc(100vh-45px)] px-4 bg-white"
+		>
+			<StyledTabs
+				defaultActiveKey={pathname.split('/')[2]}
+				onChange={(key) => navigate(`${key}${add}`)}
+			>
+				{TabsValue.map((tab) => (
+					<StyledTabs.TabPane tab={tab.value} key={tab.to} />
+				))}
+			</StyledTabs>
+			<Outlet />
+		</Flex>
+	)
+}

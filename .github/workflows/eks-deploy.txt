@@ -1,0 +1,66 @@
+name: Build and Push
+
+on:
+  push:
+    branches: [ prod, dev ]
+  pull_request:
+    branches: [ prod ]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Настройка Node.js для сборки frontend-crm
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+      
+      # Установка зависимостей
+      - name: Install dependencies
+        run: npm ci
+      
+      # Сборка приложения
+      - name: Build frontend-crm
+        run: npm run build
+      
+      # Настройка доступа к AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Сборка и отправка образа
+      - name: Build and push image
+        run: |
+          # Для frontend-crm (React/Vue)
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/unibook/frontend-crm:${{ github.sha }} .
+          docker push ${{ steps.login-ecr.outputs.registry }}/unibook/frontend-crm:${{ github.sha }}
+
+      # Триггер для деплоя
+      - name: Generate GitHub App token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: UnicornBook
+          repositories: devops
+
+      - name: Trigger deployment workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: UnicornBook/devops
+          event-type: service-updated
+          client-payload: '{"service": "frontend-crm", "image_tag": "${{ github.sha }}", "repo": "${{ github.repository }}", "branch": "${{ github.ref }}"}'

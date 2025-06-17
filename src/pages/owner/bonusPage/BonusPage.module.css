@@ -1,0 +1,179 @@
+.main_wrapper {
+	max-width: 500px;
+	border-radius: 10px;
+	/* border: 1px solid gainsboro; */
+	padding: 10px;
+	margin: 10px;
+}
+
+.wrapper {
+}
+
+.inner_wrapper {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: 10px;
+}
+
+.buttons_wrapper {
+	display: flex;
+	width: 100%;
+	justify-content: end;
+	align-items: end;
+	cursor: pointer;
+	gap: 10px;
+	padding-right: 20px;
+}
+
+.edit_btn {
+	width: 80px;
+	height: 25px;
+	background-color: rgb(182, 182, 182);
+	cursor: pointer;
+	color: white;
+	border-radius: 5px 5px 0px 0px;
+	letter-spacing: 0.7px;
+	font-size: 14px;
+}
+
+.save_btn {
+	width: 80px;
+	height: 25px;
+	cursor: pointer;
+	border-radius: 5px 5px 0px 0px;
+	color: white;
+	letter-spacing: 0.7px;
+	font-size: 14px;
+}
+
+.button_wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: end;
+	margin-top: 10px;
+}
+
+.get_card {
+	margin-bottom: 20px;
+	margin-top: 20px;
+	position: relative;
+	width: fit-content;
+}
+
+.data_text {
+	font-size: 13px;
+	color: #32a011ec;
+}
+
+.comment_text {
+	overflow: scroll;
+	margin-bottom: 5px;
+}
+
+.suka {
+	overflow-y: hidden;
+}
+
+.course {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+	max-width: 100%;
+	overflow: hidden;
+	width: 700px;
+	height: 160px;
+}
+
+.course h6 {
+	opacity: 0.8;
+	margin: 0;
+	letter-spacing: 0.7px;
+	text-transform: uppercase;
+}
+
+.course h3 {
+	letter-spacing: 1px;
+	margin: 8px 0;
+	font-size: 17px;
+	word-break: break-all;
+}
+
+.course_preview {
+	background-color: #32a011ec;
+	color: #fff;
+	padding: 20px;
+	max-width: 200px;
+	min-width: 200px;
+}
+
+.lox {
+	color: #32a011ec;
+	font-size: 22px;
+}
+
+.icons {
+	width: 23px;
+	height: 23px;
+	color: white;
+}
+
+.course_info {
+	padding: 18px;
+	position: relative;
+	width: 100%;
+	border: 1px solid gainsboro;
+	border-radius: 0px 10px 10px 0px;
+	position: relative;
+}
+
+.input {
+	width: 80px;
+	display: inline-block;
+	border: 1px solid gainsboro;
+	height: 40px;
+	border-radius: 5px;
+	padding-left: 3px;
+	font-size: 14px;
+}
+
+@media (max-width: 450px) {
+	.main_wrapper {
+		max-width: 280px;
+		border-radius: 10px;
+		padding: 0px;
+		margin: 0px;
+	}
+}
+
+@media (max-width: 450px) {
+	.course {
+		overflow: hidden;
+		width: 100%;
+		max-width: 430px;
+		height: 120px;
+		min-width: 350px !important;
+	}
+	.course_preview {
+		background-color: #32a011ec;
+		color: #fff;
+		padding: 5px;
+		max-width: 100px;
+		min-width: 100px;
+	}
+	.course_info {
+		padding: 2px;
+	}
+	.data_text {
+		font-size: 11px;
+	}
+	.lox {
+		font-size: 13px;
+	}
+	.comment_text {
+		overflow: scroll;
+		margin-bottom: 5px;
+		font-size: 13px;
+	}
+}

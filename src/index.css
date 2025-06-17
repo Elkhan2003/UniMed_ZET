@@ -1,0 +1,442 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@400..800&display=swap');
+
+/* Основной класс для настройки скроллбара */
+.custom-scrollbar {
+	overflow-y: auto;
+	scrollbar-width: thin; /* Для Firefox */
+  }
+  
+  /* Стили для Webkit браузеров (Chrome, Safari, новые версии Edge) */
+  .custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+	background-color: #f1f1f1;
+	border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+	background-color: #888;
+	border-radius: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background-color: #555;
+  }
+  
+  /* Темная версия скроллбара */
+  .custom-scrollbar-dark::-webkit-scrollbar-track {
+	background-color: #2d3748;
+  }
+  
+  .custom-scrollbar-dark::-webkit-scrollbar-thumb {
+	background-color: #4a5568;
+  }
+  
+  .custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
+	background-color: #718096;
+  }
+  
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: none;
+	outline: none;
+	text-decoration: none;
+	list-style-type: none;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./assets/fonts/Segoe\ UI.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./assets/fonts/Segoe\ UI\ Semibold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./assets/fonts/Segoe\ UI\ Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./assets/fonts/Segoe\ UI\ Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./assets/fonts/Segoe\ UI\ Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./assets/fonts/Segoe\ UI\ Semilight.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@layer utilities {
+	.placeholder-font-involve::placeholder {
+		font-family: 'Involve', sans-serif;
+	}
+} 
+
+body {
+	font-family: 'Segoe UI';
+}
+
+.baloo-cheatan {
+	font-family: 'Baloo Chettan 2', serif;
+}
+
+.myfont {
+	font-family: 'Segoe UI';
+}
+
+::placeholder {
+	font-family: var(--font-family);
+}
+
+:-ms-input-placeholder {
+	font-family: var(--font-family);
+}
+
+::-ms-input-placeholder {
+	font-family: var(--font-family);
+}
+
+.service {
+	background-color: white !important;
+}
+.master {
+	background-color: white !important;
+}
+.App {
+	background-color: white;
+}
+.main {
+	padding-top: 65px;
+	height: 100%;
+}
+.barbershop {
+	background-color: #282829;
+}
+.barber-text {
+	color: white !important;
+}
+.clinic {
+	background-color: #0887c9;
+}
+
+.no-select {
+	user-select: none; /* Для современных браузеров */
+	-webkit-user-select: none; /* Для Safari */
+	-moz-user-select: none; /* Для Firefox */
+	-ms-user-select: none; /* Для Internet Explorer/Edge */
+}
+
+:root {
+	--myviolet: #ff99d4;
+	--myadmin: #5865f2;
+	--myviolethover: #fe8dcf;
+	--mygray: #eaeaea;
+	--mydark: #101010;
+	/* CLINIC */
+	--clinic-color: #ff99d4;
+	--ui-background-color: #ff99d4;
+	--ui-color-white: #ffffff;
+	--ui-active-background: #ff99d4;
+	--ui-hover-background: #ff99d4;
+	--ui-disabled-color: #838181;
+	--ui-disabled--background: #1c1b1f1f;
+	--ui-black: #000000;
+	/* FONT */
+	--font-family: 'Segoe UI';
+	--text: 12px;
+	--title: 16px;
+	/* Calendar */
+	--fc-small-font-size: 0.85em;
+	--fc-page-bg-color: #fff;
+	--fc-neutral-bg-color: hsla(0, 0%, 82%, 0.3);
+	--fc-neutral-text-color: grey;
+	--fc-border-color: #ddd;
+	--fc-button-text-color: #fff;
+	--fc-button-bg-color: #ff99d4;
+	--fc-button-border-color: #ff99d4;
+	--fc-button-hover-bg-color: #ff99d4;
+	--fc-button-hover-border-color: #ff99d4;
+	--fc-button-active-bg-color: #ff99d4;
+	--fc-button-active-border-color: #ff99d4;
+	--fc-more-link-bg-color: #ff99d4;
+	--fc-more-link-text-color: white;
+	--fc-event-resizer-thickness: 8px;
+	--fc-event-resizer-dot-total-width: 8px;
+	--fc-event-resizer-dot-border-width: 1px;
+	--fc-non-business-color: hsla(0, 0%, 84%, 0.3);
+	--fc-bg-event-color: #ff99d4;
+	--fc-bg-event-opacity: 0.3;
+	--fc-highlight-color: rgba(188, 232, 241, 0.3);
+	--fc-today-bg-color: rgba(255, 220, 40, 0.15);
+	--fc-now-indicator-color: red;
+}
+
+*.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+	box-shadow: none;
+}
+
+.fc .fc-button-primary:focus {
+	box-shadow: none;
+}
+
+.fc-header-toolbar {
+	font-size: 16px;
+}
+
+@media (max-width: 800px) {
+	.fc-header-toolbar {
+		font-size: 10px;
+		height: 35px;
+	}
+}
+
+@media (max-width: 550px) {
+	.fc-header-toolbar {
+		font-size: 8px;
+	}
+}
+
+@media (max-width: 450px) {
+	.fc-header-toolbar {
+		font-size: 6px;
+	}
+	.fc {
+		min-width: 300px;
+		overflow-x: scroll;
+		scroll-margin-bottom: 60px;
+		font-size: 8px;
+	}
+}
+
+.text {
+	color: #383b3e;
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	font-weight: 400;
+}
+.title {
+	color: #212529;
+	font-size: 20px;
+	letter-spacing: 0.5px;
+	font-weight: 400;
+}
+.name_page {
+	color: #212529;
+	font-size: 18px;
+	letter-spacing: 0.5px;
+	font-weight: 400;
+}
+.label {
+	font-family: 'Segoe UI This';
+	font-size: 15px;
+	font-weight: 500;
+	color: #87939e;
+}
+
+::-webkit-outer-spin-button,
+::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+*::-webkit-scrollbar {
+	display: none;
+}
+
+.wrapper-lottie {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.lineHR {
+	height: 1px;
+	width: 100%;
+	background-color: rgba(77, 86, 95, 0.15);
+}
+@media only screen and (max-width: 700px) {
+	.title {
+		font-size: 16px !important;
+	}
+}
+
+.alice-carousel__prev-btn,
+.alice-carousel__prev-btn-item {
+	font-size: 40px;
+	position: absolute;
+	left: 0px;
+	top: 43%;
+}
+
+.alice-carousel__next-btn,
+.alice-carousel__next-btn-item {
+	font-size: 40px;
+	position: absolute;
+	right: 0px;
+	top: 43%;
+}
+
+.alice-carousel {
+	object-fit: cover;
+}
+.alice-carousel__next-btn-item > * {
+	width: 60px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 999px;
+	transition: all 0.3s ease-in-out;
+	background-color: #fff;
+}
+.alice-carousel__prev-btn-item > * {
+	width: 60px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 999px;
+	transition: all 0.3s ease-in-out;
+	background-color: #fff;
+}
+
+.notted {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		150deg,
+		rgba(255, 255, 255) 0%,
+		#feb8c0 1%,
+		rgba(255, 255, 255) 3%,
+		rgba(255, 255, 255) 3%,
+		rgba(255, 255, 255) 4%,
+		rgba(255, 255, 255) 5%,
+		#feb8c0 6%,
+		rgba(255, 255, 255) 8%,
+		rgba(255, 255, 255) 8%,
+		rgba(255, 255, 255) 9%,
+		rgba(255, 255, 255) 10%,
+		#feb8c0 11%,
+		rgba(255, 255, 255) 13%,
+		rgba(255, 255, 255) 13%,
+		rgba(255, 255, 255) 14%,
+		rgba(255, 255, 255) 15%,
+		#feb8c0 16%,
+		rgba(255, 255, 255) 18%,
+		rgba(255, 255, 255) 18%,
+		rgba(255, 255, 255) 19%,
+		rgba(255, 255, 255) 20%,
+		#feb8c0 21%,
+		rgba(255, 255, 255) 23%,
+		rgba(255, 255, 255) 23%,
+		rgba(255, 255, 255) 24%,
+		rgba(255, 255, 255) 25%,
+		#feb8c0 26%,
+		rgba(255, 255, 255) 28%,
+		rgba(255, 255, 255) 28%,
+		rgba(255, 255, 255) 29%,
+		rgba(255, 255, 255) 30%,
+		#feb8c0 31%,
+		rgba(255, 255, 255) 33%,
+		rgba(255, 255, 255) 33%,
+		rgba(255, 255, 255) 34%,
+		rgba(255, 255, 255) 35%,
+		#feb8c0 36%,
+		rgba(255, 255, 255) 38%,
+		rgba(255, 255, 255) 38%,
+		rgba(255, 255, 255) 39%,
+		rgba(255, 255, 255) 40%,
+		#feb8c0 41%,
+		rgba(255, 255, 255) 43%,
+		rgba(255, 255, 255) 43%,
+		rgba(255, 255, 255) 44%,
+		rgba(255, 255, 255) 45%,
+		#feb8c0 46%,
+		rgba(255, 255, 255) 48%,
+		rgba(255, 255, 255) 48%,
+		rgba(255, 255, 255) 49%,
+		rgba(255, 255, 255) 50%,
+		#feb8c0 51%,
+		rgba(255, 255, 255) 53%,
+		rgba(255, 255, 255) 53%,
+		rgba(255, 255, 255) 54%,
+		rgba(255, 255, 255) 55%,
+		#feb8c0 56%,
+		rgba(255, 255, 255) 58%,
+		rgba(255, 255, 255) 58%,
+		rgba(255, 255, 255) 59%,
+		rgba(255, 255, 255) 60%,
+		#feb8c0 61%,
+		rgba(255, 255, 255) 63%,
+		rgba(255, 255, 255) 63%,
+		rgba(255, 255, 255) 64%,
+		rgba(255, 255, 255) 65%,
+		#feb8c0 66%,
+		rgba(255, 255, 255) 68%,
+		rgba(255, 255, 255) 68%,
+		rgba(255, 255, 255) 69%,
+		rgba(255, 255, 255) 70%,
+		#feb8c0 71%,
+		rgba(255, 255, 255) 73%,
+		rgba(255, 255, 255) 73%,
+		rgba(255, 255, 255) 74%,
+		rgba(255, 255, 255) 75%,
+		#feb8c0 76%,
+		rgba(255, 255, 255) 78%,
+		rgba(255, 255, 255) 78%,
+		rgba(255, 255, 255) 79%,
+		rgba(255, 255, 255) 80%,
+		#feb8c0 81%,
+		rgba(255, 255, 255) 83%,
+		rgba(255, 255, 255) 83%,
+		rgba(255, 255, 255) 84%,
+		rgba(255, 255, 255) 85%,
+		#feb8c0 86%,
+		rgba(255, 255, 255) 88%,
+		rgba(255, 255, 255) 88%,
+		rgba(255, 255, 255) 89%,
+		rgba(255, 255, 255) 90%,
+		#feb8c0 91%,
+		rgba(255, 255, 255) 93%,
+		rgba(255, 255, 255) 93%,
+		rgba(255, 255, 255) 94%,
+		rgba(255, 255, 255) 95%,
+		#feb8c0 96%,
+		rgba(255, 255, 255) 98%,
+		rgba(255, 255, 255) 98%,
+		rgba(255, 255, 255) 99%,
+		rgba(255, 255, 255) 100%
+	);
+}

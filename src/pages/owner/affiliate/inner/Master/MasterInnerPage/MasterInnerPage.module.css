@@ -1,0 +1,240 @@
+.container_master_inner_page {
+	width: 100%;
+	height: 100%;
+	margin-top: 10px;
+	padding: 20px;
+	border: 1px solid #c2c3c4;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	overflow-y: scroll;
+	padding-bottom: 200px;
+}
+.container_master_inner_header {
+	width: 100%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.container_master_header_left_box {
+	display: flex;
+	gap: 10px;
+}
+.container_main_master_inner_page {
+	width: 100%;
+	padding: 7px;
+	display: flex;
+	gap: 10px;
+}
+.container_master_main_avatar {
+	width: fit-content;
+}
+.container_master_avatar {
+	width: 150px;
+	height: 150px;
+	border: 1px solid #c2c3c4;
+	border-radius: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.container_master_image {
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	object-fit: cover;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+.container_master_card_info {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	gap: 8px;
+}
+.master_fullname_title {
+	font-size: 20px;
+	font-weight: 400;
+}
+.container_master_shedule_typeone_active {
+	width: 100%;
+	transition-duration: 500ms;
+	border: 1px solid #c2c3c4;
+}
+.master_schedule_datepicker {
+	width: 210px;
+	height: 40px;
+	margin: 10px;
+	border-radius: 12px;
+	border: 1px solid #c2c3c4;
+	font-size: 12px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.container_schedule_typeone_dayofweek {
+	width: 25px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border-right: 1px solid #c2c3c4;
+}
+.container_schedule_card {
+	font-size: 14px;
+	color: #acacac;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.container_schedule_typeone {
+	height: 100%;
+	display: flex;
+	align-items: flex-end;
+}
+.container_schedule_typetwo_timeofweek {
+	width: 100%;
+	height: 25px;
+	border-top: 1px solid #c2c3c4;
+	display: flex;
+	justify-content: space-around;
+}
+.container_schedule_bottom_card {
+	width: 10%;
+	font-size: 12px;
+	color: #acacac;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.on_the_right_container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	gap: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-top: 2px;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.schedules_insides_container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	gap: 3px;
+	justify-content: space-around;
+}
+.schedules_inside_card {
+	width: 100%;
+	height: 100%;
+	border: 1.5px dashed #acacac;
+}
+.container_menu_one {
+	display: flex;
+	gap: 10px;
+}
+.container_menu {
+	display: none;
+}
+@media only screen and (max-width: 1000px) {
+	.container_menu {
+		display: block;
+	}
+	.container_menu_one {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	.container_master_avatar {
+		width: 100px;
+		height: 100px;
+	}
+	.container_master_image {
+		width: 100px;
+		height: 100px;
+	}
+	.master_fullname_title{
+		font-size: 15px;
+	}
+	.container_master_main_avatar {
+		width: 220px;
+		min-width: 220px;
+		margin-top: 5px;
+	}
+	.container_main_master_inner_page {
+		padding: 6px;
+		gap: 6px;
+	}
+	.container_master_card_info {
+		padding: 6px;
+		gap: 6px;
+	}
+	.master_schedule_datepicker {
+		width: fit-content;
+		height: 30px;
+		margin: 6px;
+		border-radius: 10px;
+		font-size: 10px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+	.container_master_main_avatar {
+		width:fit-content;
+		min-width: fit-content;
+		display: flex;
+	}
+	.container_master_inner_page {
+		margin-top: 5px;
+		padding: 10px;
+		border: 1px solid #c2c3c4;
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+}
+
+@media (max-width: 450px) {
+	.container_master_avatar {
+		width: 70px;
+		height: 70px;
+		justify-content: center;
+	}
+	.container_master_image {
+		width: 100px;
+		height: 100px;
+	}
+	.container_main_master_inner_page {
+		padding: 0px;
+		gap: 3px;
+		flex-direction: column;
+	}
+	.container_master_card_info {
+		padding: 3px;
+		gap: 2px;
+	}
+	.container_master_main_avatar {
+		width:fit-content;
+		min-width: fit-content;
+	}
+	.container_master_inner_page {
+		margin-top: 3px;
+		padding: 5px;
+		border: 1px solid #c2c3c4;
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+}
+

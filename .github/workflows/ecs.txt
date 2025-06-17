@@ -1,0 +1,112 @@
+name: ECS deploy Main
+
+on:
+  push:
+    branches: [ prod, dev ]
+  pull_request:
+    branches: [ prod, dev ]
+
+
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REGISTRY: 430118814982.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+  ECR_REPOSITORY: unibook/frontend-crm
+  ECS_SERVICE: unibook-frontend-crm
+  ECS_CLUSTER: unibook-ec2-cluster
+  ECS_TASK_DEFINITION: task-definition.json
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      IMAGE_TAG: ${{ github.sha }}
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+    
+    - name: Load environment variables
+      run: |
+        if [[ ${{ github.ref }} == 'refs/heads/prod' ]]; then
+          echo "ECS_SERVICE=${{ secrets.PROD_ECS_SERVICE }}" >> $GITHUB_ENV
+          echo "ECS_CLUSTER=${{ secrets.PROD_ECS_CLUSTER }}" >> $GITHUB_ENV
+          echo "ECS_TASK_DEFINITION=${{ secrets.PROD_ECS_TASK_DEFINITION }}" >> $GITHUB_ENV
+        else
+          echo "ECS_SERVICE=${{ secrets.DEV_ECS_SERVICE }}" >> $GITHUB_ENV
+          echo "ECS_CLUSTER=${{ secrets.DEV_ECS_CLUSTER }}" >> $GITHUB_ENV
+          echo "ECS_TASK_DEFINITION=${{ secrets.DEV_ECS_TASK_DEFINITION }}" >> $GITHUB_ENV
+        fi
+
+
+    - name: Download task definition
+      run: |
+        aws ecs describe-task-definition --task-definition ${{ env.ECS_TASK_DEFINITION }} \
+        --query taskDefinition > task-definition.json
+        echo "Task definition content:"
+        cat task-definition.json
+    
+    - name: Install jq
+      run: sudo apt-get install -y jq
+  
+    - name: Clean task definition
+      run: |
+          jq 'del(.taskDefinitionArn, .revision, .status, .registeredAt, .registeredBy, .enableFaultInjection)' task-definition.json > cleaned-task-definition.json
+          mv cleaned-task-definition.json task-definition.json
+
+    - name: Debug - List files
+      run: ls -la
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Set image tag
+      run: |
+        if [[ ${{ github.ref }} == 'refs/heads/prod' ]]; then
+          echo "IMAGE_TAG=prod" >> $GITHUB_ENV
+        else
+          echo "IMAGE_TAG=dev:latest" >> $GITHUB_ENV
+        fi
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+    
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: task-definition.json
+        container-name: unibook-frontend-crm
+        image: ${{ steps.build-image.outputs.image }}
+
+    - name: Deploy to Production ECS
+      if: github.ref == 'refs/heads/prod'
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}
+        cluster: ${{ env.ECS_CLUSTER }}
+        wait-for-service-stability: true
+
+    - name: Deploy to Development ECS
+      if: github.ref == 'refs/heads/dev'
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}-dev
+        cluster: ${{ env.ECS_CLUSTER }}-dev
+        wait-for-service-stability: true

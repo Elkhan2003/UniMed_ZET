@@ -1,0 +1,9 @@
+.container_settings {
+	width: 100%;
+	height: fit-content;
+	margin-top: 10px;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}

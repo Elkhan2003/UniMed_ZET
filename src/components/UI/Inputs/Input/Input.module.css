@@ -1,0 +1,51 @@
+.wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.label {
+	font-size: 13px;
+	font-weight: 400;
+	color: black;
+	font-family: 'Involve', sans-serif;
+}
+
+.input {
+	width: 100%;
+	height: 37px;
+	border-radius: 10px;
+	font-size: 13px;
+	transition: 0.2s;
+	outline: none;
+	padding: 0px 10px;
+	color: var(--mydark);
+	font-family: 'Involve', sans-serif;
+}
+
+.input::placeholder {
+	color: #1e1e1f96;
+	font-weight: 300;
+}
+
+.input:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+&[type='number']::-webkit-outer-spin-button,
+&[type='number']::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+@media (max-width: 450px) {
+	.label {
+		font-size: 13px;
+		margin-bottom: -5px;
+	}
+	.input {
+		height: 35px;
+		font-size: 13px;
+	}
+}

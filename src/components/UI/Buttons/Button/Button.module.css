@@ -1,0 +1,108 @@
+.button {
+	width: 100%;
+	height: 35px;
+	max-height: 35px;
+	min-height: 35px;
+	min-width: 100px;
+	background-color: var(--myviolet);
+	border-radius: 9px;
+	color: white;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	cursor: pointer;
+	outline: none;
+	transition: 0.1s ease-in-out;
+	font-size: 14px;
+	font-family: 'Involve', sans-serif;
+}
+
+.button:hover {
+	background-color: var(--myviolethover);
+}
+
+.button:disabled {
+	cursor: not-allowed;
+	color: var(--ui-disabled-color);
+	border: 'var(--ui-disabled-color)';
+	background-color: var(--ui-disabled--background);
+}
+
+/* DELETE Button */
+
+.delete_button {
+	width: 100%;
+	height: 40px;
+	min-width: 100px;
+	font-weight: 600;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	gap: 10px;
+	background-color: #ffffff;
+	border: 1px solid red;
+	outline: none;
+	transition: 0.1s ease-in-out;
+	color: red;
+	font-size: 15px;
+	font-family: 'Involve', sans-serif;
+}
+
+.delete_button:active {
+	background-color: red;
+	border: 1px solid red;
+	color: #ffffff;
+}
+
+/* cencel_button */
+
+.cancel_button {
+	width: 100%;
+	height: 40px;
+	min-width: 100px;
+	font-weight: 700;
+	border-radius: 5px;
+	padding: 12px 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	gap: 10px;
+	background-color: #ffffff;
+	border: 1px solid grey;
+	outline: none;
+	transition: 0.1s ease-in-out;
+	color: grey;
+	font-family: 'Involve', sans-serif;
+}
+
+.cancel_button:active {
+	background-color: grey;
+	border: 1px solid grey;
+	color: #ffffff;
+}
+
+@media only screen and (max-width: 650px) {
+	.button {
+		padding: 6px 9px !important;
+		font-size: 14px;
+	}
+	.delete_button {
+		padding: 6px 9px;
+	}
+}
+@media (max-width: 450px) {
+	.button {
+		padding: 6px 9px !important;
+		font-size: 13px;
+		width: fit-content;
+		font-weight: 500;
+	}
+	.delete_button {
+		padding: 6px 9px;
+	}
+}

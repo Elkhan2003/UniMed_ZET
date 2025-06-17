@@ -1,0 +1,101 @@
+.picker {
+	width: 200px;
+	height: 150px;
+	display: grid;
+	grid-auto-flow: column;
+	gap: 2ch;
+	position: relative;
+	box-sizing: border-box;
+	background: white;
+	border-radius: 8px;
+}
+
+.time-mask {
+	height: 150px;
+	position: relative;
+	overflow: hidden;
+}
+
+.time-mask::before,
+.time-mask::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 50px;
+	pointer-events: none;
+	z-index: 2;
+}
+
+.time-mask::before {
+	top: 0;
+	background: linear-gradient(to bottom, white 0%, transparent 100%);
+}
+
+.time-mask::after {
+	bottom: 0;
+	background: linear-gradient(to top, white 0%, transparent 100%);
+}
+
+.hours,
+.minutes {
+	display: grid;
+	grid-auto-rows: 50px;
+	align-items: center;
+	overflow-y: auto;
+	overscroll-behavior-y: contain;
+	scroll-snap-type: y mandatory;
+	height: 100%;
+	padding: 50px 0;
+	position: relative;
+}
+
+.hours time,
+.minutes time {
+	scroll-snap-align: center;
+	transition: all 0.3s ease;
+	font-size: 24px;
+	text-align: center;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: hsl(0 0% 30%);
+	font-weight: lighter;
+	opacity: 0.5;
+	transform: scale(0.6);
+}
+
+.separator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+	color: hsl(0 0% 20%);
+	padding-top: 50px;
+}
+
+.hours::-webkit-scrollbar,
+.minutes::-webkit-scrollbar {
+	width: 0;
+}
+
+.time-mask::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50px;
+	height: 50px;
+	border-radius: 30px;
+	background: rgba(0, 0, 0, 0.03);
+	pointer-events: none;
+	z-index: 1;
+	color: black;
+}
+
+.centeredSpan {
+	transform: scale(1) !important;
+	color: black !important;
+	font-weight: 600 !important;
+}

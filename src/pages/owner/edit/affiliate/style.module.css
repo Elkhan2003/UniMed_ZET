@@ -1,0 +1,35 @@
+.content {
+	border-radius: 8px;
+	height: 630px;
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.inp_place {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.control {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 300px;
+}
+
+@media (max-width: 450px) {
+	.content {
+		height: fit-content;
+		padding: 5px;
+		width: 280px;
+		gap: 5px;
+	}
+	.inp_place {
+		gap: 5px;
+	}
+}

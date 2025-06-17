@@ -1,0 +1,14 @@
+.container_master_page {
+	width: 100%;
+	height: 96vh;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	overflow-y: scroll;
+}
+.container_master_header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

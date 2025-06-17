@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  frontend_admin:
+    image: unibook-crm-admin
+    container_name: unibook_admin
+    ports:
+      - "3001:80"
